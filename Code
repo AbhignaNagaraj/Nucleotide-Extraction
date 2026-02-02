@@ -1,0 +1,30 @@
+from Bio import SeqIO
+
+def extract_sequence_from_fasta(fasta_file_path, start_pos, end_pos):
+    try:
+        with open(fasta_file_path, 'r') as fasta_file:
+            # Parse the FASTA file
+            records = SeqIO.parse(fasta_file, 'fasta')
+            
+            # Iterate over each sequence record
+            for record in records:
+                # Extract the sequence
+                sequence = record.seq
+
+                # Extract the subsequence based on the provided coordinates
+                subsequence = sequence[1340073:1340972]
+
+                # Print the subsequence
+                print("Subsequence from position {} to {}: {}".format(start_pos, end_pos, subsequence))
+
+    except FileNotFoundError:
+        print("File not found:", fasta_file_path)
+    except Exception as e:
+        print("An error occurred:", str(e))
+
+fasta_file_path = '/content/Escherichia_coli_ATCC_11775.fasta'
+start_pos = 1340073
+end_pos = 1340972
+extract_sequence_from_fasta(fasta_file_path, start_pos, end_pos)
+
+
